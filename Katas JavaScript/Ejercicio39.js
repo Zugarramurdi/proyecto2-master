@@ -1,5 +1,7 @@
-/* Dado el siguiente código usa forof y forin para hacer la media del volumen de todos los sonidos favoritos que tienen los usuarios.
-Es decir, la media de volumen de todos los volumenes juntos. */
+/* Dado el siguiente código usa forof y forin para saber cuantas veces ha sido cada sonido agregado por los usuarios a favorito.
+Para ello recorre la lista de usuarios y usa forin para recoger el nombre de los sonidos que el usuario tenga como favoritos.
+Una vez accedas a ellos piensa en la mejor forma de hacer un conteo de cada vez que ese sonido se repita como favorito en cada usuario.
+Este ejercicio es un poco complicado con los conocimientos actuales pero...a la vez un buen reto y oportunidad para comprender que hay muchas formas de hacer las cosas en JavaScript. */
 
 const users = [
   {
@@ -36,14 +38,14 @@ const users = [
   }
 ]
 
-let count = 0
-let volTotal = 0
+let numSounds = {}
 for (const user of users) {
   for (const sound in user.favoritesSounds) {
-    volTotal += user.favoritesSounds[sound].volume
-    count++
+    if (numSounds[sound]) {
+      numSounds[sound]++
+    } else {
+      numSounds[sound] = 1
+    }
   }
 }
-
-const avg = volTotal / count
-console.log(`El volumen medio de los usurios es: ${avg}`)
+console.log(numSounds)
